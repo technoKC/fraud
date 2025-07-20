@@ -1,0 +1,22 @@
+
+STUDENT_ID,STUDENT_NAME,TRANSACTION_ID,LOAN_AMOUNT,SEMESTER,DEPARTMENT,TRANSACTION_DATE,BANK_NAME,STATUS
+MANIT001,Rahul Kumar,LTX001,50000,VII,Computer Science,2025-01-15,SBI,Received
+MANIT002,Priya Singh,LTX002,75000,V,Electronics,2025-01-16,HDFC,Received
+MANIT003,Amit Patel,LTX003,60000,III,Mechanical,2025-01-17,ICICI,Pending
+MANIT004,Sneha Sharma,LTX004,80000,VII,Civil,2025-01-18,PNB,Received
+MANIT005,Vijay Verma,LTX005,55000,V,Computer Science,2025-01-19,Axis,Pending
+MANIT006,Anita Gupta,LTX006,45000,I,Electrical,2025-01-20,Bank of Baroda,Received
+MANIT007,Ravi Jain,LTX007,70000,VI,Chemical,2025-01-21,Canara Bank,Received
+MANIT008,Pooja Agarwal,LTX008,65000,IV,Architecture,2025-01-22,Union Bank,Pending
+MANIT009,Suresh Yadav,LTX009,52000,II,Electronics,2025-01-23,IDBI,Received
+MANIT010,Kavita Saxena,LTX010,58000,VIII,Mechanical,2025-01-24,Yes Bank,Pending
+MANIT011,Deepak Singh,LTX011,48000,III,Civil,2025-01-25,SBI,Received
+MANIT012,Neha Tiwari,LTX012,72000,VII,Computer Science,2025-01-26,HDFC,Received
+MANIT013,Ashok Kumar,LTX013,67000,V,Electrical,2025-01-27,ICICI,Pending
+MANIT014,Sunita Joshi,LTX014,53000,I,Chemical,2025-01-28,PNB,Received
+MANIT015,Manoj Dubey,LTX015,59000,VI,Architecture,2025-01-29,Axis,Pending
+MANIT016,Rekha Mishra,LTX016,46000,IV,Electronics,2025-01-30,Bank of Baroda,Received
+MANIT017,Arun Soni,LTX017,73000,II,Mechanical,2025-01-31,Canara Bank,Received
+MANIT018,Geeta Sharma,LTX018,68000,VIII,Civil,2025-02-01,Union Bank,Pending
+MANIT019,Vinod Chouhan,LTX019,54000,III,Computer Science,2025-02-02,IDBI,Received
+MANIT020,Meera Patel,LTX020,57000,VII,Electrical,2025-02-03,Yes Bank,Pending

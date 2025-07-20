@@ -1,0 +1,19 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "docker-compose up -d"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[[services]]
+name = "backend"
+sourceDir = "backend"
+healthcheckPath = "/docs"
+
+[[services]]
+name = "frontend"
+sourceDir = "frontend"
+healthcheckPath = "/" 

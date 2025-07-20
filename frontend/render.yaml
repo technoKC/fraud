@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: fraudshield-frontend
+    env: node
+    buildCommand: yarn install && yarn build
+    startCommand: npx serve -s build -l $PORT
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://fraudshield-backend.onrender.com
+      - key: CI
+        value: false
+      - key: NODE_ENV
+        value: production 

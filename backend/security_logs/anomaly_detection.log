@@ -1,0 +1,149 @@
+2025-07-19 15:54:20,210 - security - INFO - Successful login: centralbank from 127.0.0.1
+2025-07-19 15:54:20,214 - security - INFO - Access token created for user: centralbank from IP: 127.0.0.1
+2025-07-19 16:08:27,874 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\sahan\Desktop\radheradhe\FraudShield\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-19 16:08:44,659 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\sahan\Desktop\radheradhe\FraudShield\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-19 16:11:20,445 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\sahan\Desktop\radheradhe\FraudShield\backend\venv\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-19 16:13:00,359 - security - INFO - Successful login: centralbank from 127.0.0.1
+2025-07-19 16:13:00,362 - security - INFO - Access token created for user: centralbank from IP: 127.0.0.1
+2025-07-19 16:13:52,245 - security - INFO - Successful login: manit from 127.0.0.1
+2025-07-19 16:13:52,246 - security - INFO - Access token created for user: manit from IP: 127.0.0.1
+2025-07-19 16:16:42,838 - security - INFO - Successful login: centralbank from 127.0.0.1
+2025-07-19 16:16:42,842 - security - INFO - Access token created for user: centralbank from IP: 127.0.0.1
+2025-07-19 16:18:28,899 - security - INFO - Successful login: manit from 127.0.0.1
+2025-07-19 16:18:28,899 - security - INFO - Access token created for user: manit from IP: 127.0.0.1
+2025-07-19 18:52:57,920 - security - INFO - Successful login: centralbank from 127.0.0.1
+2025-07-19 18:52:57,927 - security - INFO - Access token created for user: centralbank from IP: 127.0.0.1
+2025-07-19 18:53:55,981 - security - INFO - Successful login: centralbank from 127.0.0.1
+2025-07-19 18:53:55,982 - security - INFO - Access token created for user: centralbank from IP: 127.0.0.1
+2025-07-19 18:58:18,104 - security - INFO - Successful login: manit from 127.0.0.1
+2025-07-19 18:58:18,105 - security - INFO - Access token created for user: manit from IP: 127.0.0.1
+2025-07-19 19:38:53,274 - security - INFO - Successful login: centralbank from 127.0.0.1
+2025-07-19 19:38:53,288 - security - INFO - Access token created for user: centralbank from IP: 127.0.0.1
+2025-07-19 19:44:09,806 - security - INFO - Successful login: manit from 127.0.0.1
+2025-07-19 19:44:09,807 - security - INFO - Access token created for user: manit from IP: 127.0.0.1
+2025-07-19 20:54:13,167 - security - WARNING - Expired token verification attempt
+2025-07-19 20:59:02,812 - security - INFO - Successful login: centralbank from 127.0.0.1
+2025-07-19 20:59:02,823 - security - INFO - Access token created for user: centralbank from IP: 127.0.0.1
+2025-07-19 21:01:00,324 - security - INFO - Successful login: manit from 127.0.0.1
+2025-07-19 21:01:00,325 - security - INFO - Access token created for user: manit from IP: 127.0.0.1
+2025-07-19 22:24:26,602 - security - INFO - Successful login: centralbank from 127.0.0.1
+2025-07-19 22:24:26,609 - security - INFO - Access token created for user: centralbank from IP: 127.0.0.1
+2025-07-19 22:27:56,743 - security - INFO - Successful login: manit from 127.0.0.1
+2025-07-19 22:27:56,743 - security - INFO - Access token created for user: manit from IP: 127.0.0.1
+2025-07-20 10:56:57,220 - security - INFO - Successful login: centralbank from 127.0.0.1
+2025-07-20 10:56:57,247 - security - INFO - Access token created for user: centralbank from IP: 127.0.0.1
+2025-07-20 10:59:11,875 - security - INFO - Successful login: manit from 127.0.0.1
+2025-07-20 10:59:11,875 - security - INFO - Access token created for user: manit from IP: 127.0.0.1
+2025-07-20 11:09:18,124 - security - INFO - Successful login: centralbank from 127.0.0.1
+2025-07-20 11:09:18,134 - security - INFO - Access token created for user: centralbank from IP: 127.0.0.1
+2025-07-20 07:32:37,189 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-20 07:42:05,338 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 07:42:05,351 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 07:49:37,692 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-20 07:50:11,913 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-20 07:50:43,518 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 07:50:43,519 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 07:51:15,748 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 07:51:15,749 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 07:54:48,312 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 07:54:48,458 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 07:55:34,609 - security - INFO - Successful login: manit from 172.18.0.1
+2025-07-20 07:55:34,610 - security - INFO - Access token created for user: manit from IP: 172.18.0.1
+2025-07-20 07:59:02,409 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 07:59:02,711 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 08:01:44,892 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 08:01:44,896 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 08:03:33,484 - security - INFO - Successful login: manit from 172.18.0.1
+2025-07-20 08:03:33,486 - security - INFO - Access token created for user: manit from IP: 172.18.0.1
+2025-07-20 08:04:54,035 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 08:04:54,039 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 08:05:50,350 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 08:05:50,351 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 08:11:07,719 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-20 08:11:45,049 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 08:11:45,052 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 08:17:49,106 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-20 08:19:28,420 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 08:19:28,435 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 08:24:24,312 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 08:24:24,315 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 08:26:40,280 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-20 08:39:05,738 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 08:39:05,818 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 08:42:56,542 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-20 08:45:16,457 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 08:45:16,459 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 08:46:06,364 - security - INFO - Successful login: manit from 172.18.0.1
+2025-07-20 08:46:06,365 - security - INFO - Access token created for user: manit from IP: 172.18.0.1
+2025-07-20 08:49:37,901 - security - INFO - Successful login: centralbank from 172.18.0.1
+2025-07-20 08:49:37,912 - security - INFO - Access token created for user: centralbank from IP: 172.18.0.1
+2025-07-20 08:54:18,848 - security - INFO - Successful login: manit from 172.18.0.1
+2025-07-20 08:54:18,852 - security - INFO - Access token created for user: manit from IP: 172.18.0.1
+2025-07-20 08:56:43,043 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-20 08:56:58,580 - security - INFO - Successful login: manit from 172.18.0.1
+2025-07-20 08:56:58,587 - security - INFO - Access token created for user: manit from IP: 172.18.0.1
+2025-07-20 08:59:10,203 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-20 08:59:40,326 - security - INFO - Successful login: manit from 172.18.0.1
+2025-07-20 08:59:40,328 - security - INFO - Access token created for user: manit from IP: 172.18.0.1
+2025-07-20 09:00:12,799 - security - INFO - Successful login: manit from 172.18.0.1
+2025-07-20 09:00:12,802 - security - INFO - Access token created for user: manit from IP: 172.18.0.1
+2025-07-20 09:02:15,194 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2025-07-20 09:11:16,125 - security - INFO - Successful login: manit from 172.18.0.1
+2025-07-20 09:11:16,150 - security - INFO - Access token created for user: manit from IP: 172.18.0.1
+2025-07-20 09:17:51,707 - security - INFO - Successful login: manit from 172.18.0.1
+2025-07-20 09:17:51,725 - security - INFO - Access token created for user: manit from IP: 172.18.0.1
