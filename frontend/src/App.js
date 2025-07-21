@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import AdminLogin from './components/AdminLogin';
@@ -12,10 +12,29 @@ function App() {
   const [uploadedData, setUploadedData] = useState(null);
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
   const [isManitLoggedIn, setIsManitLoggedIn] = useState(false);
+  const [user, setUser] = useState(null); // Store OAuth user
 
   const showPage = (page) => {
     setCurrentPage(page);
   };
+
+  // 🔐 Google OAuth auto redirect on first load
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get("email");
+    const name = params.get("name");
+
+    if (email && name) {
+      setUser({ email, name });
+      // You can redirect to dashboard or handle user state here
+      setCurrentPage("dashboard"); // Optional: auto-login to dashboard
+    } else {
+      // Only auto-redirect on home page
+      if (currentPage === 'home' && !user) {
+        window.location.href = "https://fraud-shield-back.onrender.com/auth/google/login";
+      }
+    }
+  }, [currentPage]);
 
   return (
     <div className="App">
@@ -54,7 +73,11 @@ function App() {
         )}
         
         {currentPage === 'dashboard' && (
-          <Dashboard data={uploadedData} setData={setUploadedData} />
+          <Dashboard 
+            data={uploadedData} 
+            setData={setUploadedData} 
+            user={user} 
+          />
         )}
         
         {currentPage === 'admin' && !isAdminLoggedIn && (
