@@ -39,7 +39,7 @@ app.add_middleware(
 # Google OAuth Constants
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
-REDIRECT_URI = f"{os.getenv('BACKEND_URL')}/auth/google/callback"
+REDIRECT_URI = f"{os.getenv('BACKEND_URL', 'https://fraud-shield-back.onrender.com')}/auth/google/callback"
 FRONTEND_URL = os.getenv("FRONTEND_URL")
 
 # Step 1: Redirect to Google Auth
@@ -53,7 +53,7 @@ def login_via_google():
         "access_type": "offline",
         "prompt": "consent"
     }
-    auth_url = "https://accounts.google.com/o/oauth2/v2/auth?" + urllib.parse.urlencode(params)
+    auth_url = "https://accounts.google.com/o/oauth2/v2/auth" + urllib.parse.urlencode(params)
     return RedirectResponse(auth_url)
 
 # Step 2: Google redirects back with code
