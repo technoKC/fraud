@@ -24,3 +24,4 @@ python-decouple==3.8
 email-validator==2.1.0
 slowapi==0.1.9
 certifi==2023.11.17
+requests==2.31.0
