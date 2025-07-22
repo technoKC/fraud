@@ -162,12 +162,14 @@ def google_auth_callback(request: Request):
 
         # Step 3: Register user (if not exists)
         if email not in registered_users:
-            registered_users[email] = {
-                "password": "oauth_user",
-                "full_name": name,
-                "organization": "OAuth",
-                "role": "viewer"
-            }
+        registered_users[email] = {
+        "password": "oauth_user",
+        "full_name": name,
+        "organization": "OAuth",
+        "role": "viewer",
+        "dashboard_type": "basic"  # Add a default value or customize if needed
+    }
+
 
         # Step 4: Create JWT token using existing handler
         token_data = oauth_handler.create_oauth_response(
