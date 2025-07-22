@@ -150,7 +150,19 @@ def google_auth_callback(request: Request):
     if "email" not in userinfo:
         raise HTTPException(status_code=400, detail="User info not found")
 
-    redirect_url = f"{FRONTEND_URL}/?email={userinfo['email']}&name={userinfo['name']}"
+    # Register or update user info
+    email = userinfo["email"]
+    name = userinfo.get("name", "User")
+    if email not in registered_users:
+        registered_users[email] = {
+            "password": "oauth_user",
+            "full_name": name,
+            "organization": "OAuth",
+            "role": "viewer"
+        }
+
+    token_data = oauth_handler.create_oauth_response({"username": email, **registered_users[email]}, request.client.host)
+    redirect_url = f"{FRONTEND_URL}/?token={token_data['access_token']}&name={name}&email={email}"
     return RedirectResponse(redirect_url)
 
 # ========== Models ==========
