@@ -53,7 +53,7 @@ def login_via_google():
         "access_type": "offline",
         "prompt": "consent"
     }
-    auth_url = "https://accounts.google.com/o/oauth2/v2/auth" + urllib.parse.urlencode(params)
+    auth_url = "https://accounts.google.com/o/oauth2/v2/auth?" + urllib.parse.urlencode(params)
     return RedirectResponse(auth_url)
 
 # Step 2: Google redirects back with code
