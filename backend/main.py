@@ -128,43 +128,64 @@ def login_via_google():
 
 @app.get("/auth/google/callback")
 def google_auth_callback(request: Request):
-    code = request.query_params.get("code")
-    if not code:
-        raise HTTPException(status_code=400, detail="Missing auth code")
+    try:
+        code = request.query_params.get("code")
+        if not code:
+            raise HTTPException(status_code=400, detail="Missing auth code")
 
-    tokens = requests.post("https://oauth2.googleapis.com/token", data={
-        "code": code,
-        "client_id": GOOGLE_CLIENT_ID,
-        "client_secret": GOOGLE_CLIENT_SECRET,
-        "redirect_uri": REDIRECT_URI,
-        "grant_type": "authorization_code"
-    }).json()
+        # Step 1: Exchange code for token
+        token_response = requests.post("https://oauth2.googleapis.com/token", data={
+            "code": code,
+            "client_id": GOOGLE_CLIENT_ID,
+            "client_secret": GOOGLE_CLIENT_SECRET,
+            "redirect_uri": REDIRECT_URI,
+            "grant_type": "authorization_code"
+        })
+        tokens = token_response.json()
 
-    access_token = tokens.get("access_token")
-    if not access_token:
-        raise HTTPException(status_code=400, detail="Failed to retrieve token")
+        access_token = tokens.get("access_token")
+        if not access_token:
+            raise HTTPException(status_code=400, detail="Failed to retrieve access token")
 
-    userinfo = requests.get("https://www.googleapis.com/oauth2/v2/userinfo", headers={
-        "Authorization": f"Bearer {access_token}"
-    }).json()
+        # Step 2: Get user info
+        userinfo_response = requests.get(
+            "https://www.googleapis.com/oauth2/v2/userinfo",
+            headers={"Authorization": f"Bearer {access_token}"}
+        )
+        userinfo = userinfo_response.json()
 
-    if "email" not in userinfo:
-        raise HTTPException(status_code=400, detail="User info not found")
+        if "email" not in userinfo:
+            raise HTTPException(status_code=400, detail="User info not found")
 
-    # Register or update user info
-    email = userinfo["email"]
-    name = userinfo.get("name", "User")
-    if email not in registered_users:
-        registered_users[email] = {
-            "password": "oauth_user",
-            "full_name": name,
-            "organization": "OAuth",
-            "role": "viewer"
-        }
+        email = userinfo["email"]
+        name = userinfo.get("name", "OAuth User")
 
-    token_data = oauth_handler.create_oauth_response({"username": email, **registered_users[email]}, request.client.host)
-    redirect_url = f"{FRONTEND_URL}/?token={token_data['access_token']}&name={name}&email={email}"
-    return RedirectResponse(redirect_url)
+        # Step 3: Register user (if not exists)
+        if email not in registered_users:
+            registered_users[email] = {
+                "password": "oauth_user",
+                "full_name": name,
+                "organization": "OAuth",
+                "role": "viewer"
+            }
+
+        # Step 4: Create JWT token using existing handler
+        token_data = oauth_handler.create_oauth_response(
+            {"username": email, **registered_users[email]},
+            request.client.host
+        )
+
+        jwt_token = token_data.get("access_token")
+        if not jwt_token:
+            raise HTTPException(status_code=500, detail="Failed to generate JWT token")
+
+        # Step 5: Redirect to frontend with token
+        redirect_url = f"{FRONTEND_URL}/?token={jwt_token}&name={name}&email={email}"
+        return RedirectResponse(redirect_url)
+
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
 
 # ========== Models ==========
 class AdminLogin(BaseModel):
