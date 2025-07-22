@@ -46,9 +46,10 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+# Trusted Host Middleware
 app.add_middleware(
     TrustedHostMiddleware,
-    allowed_hosts=os.getenv("TRUSTED_HOSTS", "localhost,127.0.0.1").split(",")
+    allowed_hosts=os.getenv("TRUSTED_HOSTS", "localhost,127.0.0.1,fraud-front.onrender.com,fraud-shield-back.onrender.com,::1").split(",")
 )
 
 @app.middleware("http")
