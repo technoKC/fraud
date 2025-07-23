@@ -1,9 +1,8 @@
 # main.py
-
+from fastapi.responses import JSONResponse, FileResponse, RedirectResponse, HTMLResponse
 from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from fastapi.responses import JSONResponse, FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import pandas as pd
@@ -126,6 +125,8 @@ def login_via_google():
     }
     return RedirectResponse("https://accounts.google.com/o/oauth2/v2/auth?" + urllib.parse.urlencode(params))
 
+# Replace your existing google_auth_callback function with this:
+
 @app.get("/auth/google/callback")
 def google_auth_callback(request: Request):
     try:
@@ -160,33 +161,81 @@ def google_auth_callback(request: Request):
         email = userinfo["email"]
         name = userinfo.get("name", "OAuth User")
 
-        # Step 3: Register user (if not exists)
+        # Step 3: Register user (if not exists) with proper role assignment
         if email not in registered_users:
+            # Assign role based on email domain or default to viewer
+            role = "viewer"
+            dashboard_type = "basic"
+            organization = "OAuth"
+            
+            # You can customize role assignment based on email domain
+            if email.endswith("@centralbank.gov") or email.endswith("@rbi.org"):
+                role = "centralbank_admin"
+                dashboard_type = "centralbank"
+                organization = "Central Bank"
+            elif email.endswith("@manit.ac.in"):
+                role = "manit_admin"
+                dashboard_type = "manit"
+                organization = "MANIT"
+            
             registered_users[email] = {
                 "password": "oauth_user",
                 "full_name": name,
-                "organization": "OAuth",
-                "role": "viewer",
-                "dashboard_type": "basic"
+                "organization": organization,
+                "role": role,
+                "dashboard_type": dashboard_type
             }
 
         # Step 4: Create JWT token using existing handler
-        token_data = oauth_handler.create_oauth_response(
-            {"username": email, **registered_users[email]},
-            request.client.host
-        )
+        user_info = {"username": email, **registered_users[email]}
+        token_data = oauth_handler.create_oauth_response(user_info, request.client.host)
 
         jwt_token = token_data.get("access_token")
         if not jwt_token:
             raise HTTPException(status_code=500, detail="Failed to generate JWT token")
 
-        # Step 5: Redirect to frontend with token
-        redirect_url = f"{FRONTEND_URL}/?token={jwt_token}&name={name}&email={email}"
-        return RedirectResponse(redirect_url)
+        # Step 5: Create HTML page that stores token and redirects
+        # This ensures proper token storage in frontend
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Login Successful</title>
+        </head>
+        <body>
+            <script>
+                // Store token in localStorage (same as your existing login)
+                localStorage.setItem('token', '{jwt_token}');
+                localStorage.setItem('username', '{email}');
+                localStorage.setItem('full_name', '{name}');
+                localStorage.setItem('dashboard_type', '{registered_users[email].get("dashboard_type", "basic")}');
+                localStorage.setItem('role', '{registered_users[email].get("role", "viewer")}');
+                
+                // Redirect to appropriate dashboard
+                const dashboardType = '{registered_users[email].get("dashboard_type", "basic")}';
+                let redirectPath = '/';
+                
+                if (dashboardType === 'centralbank') {{
+                    redirectPath = '/admin-dashboard';
+                }} else if (dashboardType === 'manit') {{
+                    redirectPath = '/manit-dashboard';
+                }} else {{
+                    redirectPath = '/dashboard';
+                }}
+                
+                window.location.href = '{FRONTEND_URL}' + redirectPath;
+            </script>
+            <p>Login successful! Redirecting...</p>
+        </body>
+        </html>
+        """
+        
+        return HTMLResponse(content=html_content)
 
     except Exception as e:
-        return JSONResponse(status_code=500, content={"error": str(e)})
-
+        # Redirect to frontend with error
+        error_url = f"{FRONTEND_URL}/?error={str(e)}"
+        return RedirectResponse(error_url)
 
 # ========== Models ==========
 class AdminLogin(BaseModel):
