@@ -1,118 +1,147 @@
+// Update your AdminLogin.js component
+
 import React, { useState } from 'react';
-import axios from 'axios';
-import getApiBaseUrl from '../utils/getApiBaseUrl';
 
-const AdminLogin = ({ setIsLoggedIn, showPage }) => {
-  const [adminId, setAdminId] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+function AdminLogin({ setIsLoggedIn, showPage, onLogin }) {
+  const [credentials, setCredentials] = useState({
+    username: '',
+    password: '',
+    dashboard_type: 'centralbank'
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleAdminLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    
+    setIsLoading(true);
+    setError('');
+
     try {
-      console.log('Attempting login with:', adminId);
-      
-      const response = await axios.post(`${getApiBaseUrl()}/admin/login/`, {
-        username: adminId,
-        password: password,
-        dashboard_type: 'centralbank'
+      const response = await fetch('https://fraud-shield-back.onrender.com/admin/login/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials)
       });
-      
-      console.log('Login response:', response.data);
-      
-      if (response.data.status === 'success') {
-        // Store the access token
-        if (response.data.access_token) {
-          localStorage.setItem('authToken', response.data.access_token);
-          console.log('Token stored successfully');
+
+      const data = await response.json();
+
+      if (response.ok && data.status === 'success') {
+        // Store token and user info
+        if (data.access_token) {
+          localStorage.setItem('token', data.access_token);
+          localStorage.setItem('username', credentials.username);
+          localStorage.setItem('dashboard_type', data.dashboard_type);
         }
-        
-        setIsLoggedIn(true);
-        showPage('adminDashboard');
-        alert('✅ Login successful! Welcome to Central Bank Dashboard');
+
+        // Call the parent's login handler
+        if (onLogin) {
+          onLogin({
+            token: data.access_token,
+            username: credentials.username,
+            dashboard_type: data.dashboard_type
+          }, 'admin');
+        } else {
+          // Fallback to old method
+          setIsLoggedIn(true);
+          showPage('adminDashboard');
+        }
       } else {
-        alert('❌ Login failed. Please check your credentials.');
+        setError(data.detail || 'Login failed');
       }
     } catch (error) {
       console.error('Login error:', error);
-      
-      if (error.response) {
-        const status = error.response.status;
-        const message = error.response.data?.detail || 'Login failed';
-        
-        if (status === 401) {
-          alert('❌ Invalid credentials!\n\nPlease contact your administrator for login details.');
-        } else if (status === 429) {
-          alert('❌ Too many login attempts!\n\nPlease wait a few minutes before trying again.');
-        } else {
-          alert(`❌ Login Error (${status})\n\n${message}`);
-        }
-      } else if (error.request) {
-        alert(`❌ Cannot connect to server!\n\nPlease ensure the backend is running and accessible at: ${getApiBaseUrl()}`);
-      } else {
-        alert(`❌ Login Error\n\n${error.message}`);
-      }
+      setError('Network error. Please try again.');
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
+  const handleChange = (e) => {
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
-    <div id="admin" className="page active">
-      <div className="admin-login">
-        <div className="admin-logo">
-          <img src="/centralbank.png" alt="Central Bank Logo" />
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-header">
+          <img src="/centralbank.png" alt="Central Bank" className="login-logo" />
+          <h2>Central Bank Admin</h2>
+          <p>Secure Banking Fraud Detection System</p>
         </div>
-        <h2>Central Bank of India</h2>
-        <h3>Admin Portal</h3>
-        <p className="login-subtitle">Fraud Detection & Prevention System</p>
-        
-        <form className="login-form" onSubmit={handleAdminLogin}>
+
+        <form onSubmit={handleSubmit} className="login-form">
+          {error && (
+            <div className="error-message" style={{
+              color: '#e74c3c',
+              backgroundColor: '#fdf2f2',
+              padding: '10px',
+              borderRadius: '5px',
+              marginBottom: '15px',
+              border: '1px solid #e74c3c'
+            }}>
+              {error}
+            </div>
+          )}
+
           <div className="form-group">
-            <label className="form-label">Admin ID</label>
-            <input 
-              type="text" 
-              className="form-input" 
-              placeholder="Enter Admin ID" 
-              value={adminId}
-              onChange={(e) => setAdminId(e.target.value)}
-              required 
-              disabled={loading}
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={credentials.username}
+              onChange={handleChange}
+              required
+              disabled={isLoading}
+              placeholder="Enter your username"
             />
           </div>
+
           <div className="form-group">
-            <label className="form-label">Password</label>
-            <input 
-              type="password" 
-              className="form-input" 
-              placeholder="Enter Password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required 
-              disabled={loading}
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={credentials.password}
+              onChange={handleChange}
+              required
+              disabled={isLoading}
+              placeholder="Enter your password"
             />
           </div>
-          <button type="submit" className="btn btn-primary admin-login-btn" disabled={loading}>
-            {loading ? (
-              <>
-                <span className="spinner-small"></span> Logging in...
-              </>
-            ) : (
-              <>
-                <span>🏦</span> Login to Central Bank
-              </>
-            )}
+
+          <button 
+            type="submit" 
+            className="login-button"
+            disabled={isLoading}
+            style={{
+              opacity: isLoading ? 0.7 : 1,
+              cursor: isLoading ? 'not-allowed' : 'pointer'
+            }}
+          >
+            {isLoading ? 'Logging in...' : '🔐 Login'}
           </button>
         </form>
-        
+
         <div className="login-footer">
-          <p>Secured with TLS 1.3 • OAuth 2.0 • AI Security</p>
+          <p>Authorized personnel only</p>
+          <button 
+            onClick={() => showPage('home')} 
+            className="back-button"
+            disabled={isLoading}
+          >
+            ← Back to Home
+          </button>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default AdminLogin;
